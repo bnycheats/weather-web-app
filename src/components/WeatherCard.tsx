@@ -16,7 +16,9 @@ export default function WeatherCard(props: WeatherCardProps) {
       <div className="px-5 flex-1 p-10 md:p-20">
         <div className="flex flex-col gap-6 md:flex-row items-center justify-between text-white text-shadow-lg">
           <div className="text-center md:text-left md:space-y-2 font-semibold">
-            <h1 className="text-4xl sm:text-5xl md:text-7xl lowercase">{format(new Date(), "p")}</h1>
+            <h1 className="text-4xl sm:text-5xl md:text-7xl lowercase">
+              {format(new Date(), "p")}
+            </h1>
             <span className="text-lg sm:text-xl md:text-2xl">
               {format(new Date(), "EEEE, d MMMM yyyy")}
             </span>
@@ -36,7 +38,7 @@ export default function WeatherCard(props: WeatherCardProps) {
           temperature={first?.values?.temperature}
           weatherIcon={getWeatherIcon(first?.values?.weatherCode) ?? ""}
         />
-        <div className="flex-1 z-10 grid grid-cols-4 items-center">
+        <div className="flex-1 z-10 grid grid-cols-2 gap-10 sm:gap-0 sm:grid-cols-4 items-center">
           {rest.map((weather, index) => (
             <WeatherInfo
               key={index}
