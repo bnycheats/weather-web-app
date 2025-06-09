@@ -12,7 +12,7 @@ export default function WeatherCard(props: WeatherCardProps) {
   const { intervals, city, country } = props;
   const [first, ...rest] = intervals;
   return (
-    <div className="max-w-7xl overflow-scroll md:overflow-hidden flex flex-col md:relative z-10 flex-1 shadow-2xl bg-[url('./assets/images/hero-img.jpg')] h-full md:h-[700px] bg-cover bg-center rounded">
+    <div className="max-w-7xl overflow-scroll md:overflow-hidden flex flex-col md:relative z-10 flex-1 shadow-2xl bg-[url('./assets/images/hero-img-mobile.jpg')] sm:bg-[url('./assets/images/hero-img.jpg')] h-full md:h-[700px] bg-cover bg-center rounded">
       <div className="px-5 flex-1 p-10 md:p-20">
         <div className="flex flex-col gap-6 md:flex-row items-center justify-between text-white text-shadow-lg">
           <div className="text-center md:text-left md:space-y-2 font-semibold">
@@ -30,25 +30,27 @@ export default function WeatherCard(props: WeatherCardProps) {
         </div>
         <SearchInput />
       </div>
-      <WeatherInfoContainer>
-        <WeatherInfoLarge
-          startTime={
-            first?.startTime && format(new Date(first.startTime), "iii eo")
-          }
-          temperature={first?.values?.temperature}
-          weatherIcon={getWeatherIcon(first?.values?.weatherCode) ?? ""}
-        />
-        <div className="flex-1 z-10 grid grid-cols-2 gap-10 sm:gap-0 sm:grid-cols-4 items-center">
-          {rest.map((weather, index) => (
-            <WeatherInfo
-              key={index}
-              startTime={format(new Date(weather.startTime), "iii")}
-              temperature={weather.values.temperature}
-              weatherIcon={getWeatherIcon(weather?.values?.weatherCode) ?? ""}
-            />
-          ))}
-        </div>
-      </WeatherInfoContainer>
+      {first && rest && (
+        <WeatherInfoContainer>
+          <WeatherInfoLarge
+            startTime={
+              first?.startTime && format(new Date(first.startTime), "iii eo")
+            }
+            temperature={first?.values?.temperature}
+            weatherIcon={getWeatherIcon(first?.values?.weatherCode) ?? ""}
+          />
+          <div className="flex-1 z-10 grid grid-cols-2 gap-10 sm:gap-0 sm:grid-cols-4 items-center">
+            {rest.map((weather, index) => (
+              <WeatherInfo
+                key={index}
+                startTime={format(new Date(weather.startTime), "iii")}
+                temperature={weather.values.temperature}
+                weatherIcon={getWeatherIcon(weather?.values?.weatherCode) ?? ""}
+              />
+            ))}
+          </div>
+        </WeatherInfoContainer>
+      )}
     </div>
   );
 }
