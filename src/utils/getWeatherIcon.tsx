@@ -67,7 +67,6 @@ export default function getWeatherIcon(code: number) {
     case 200:
     case 386:
     case 389:
-    case 392:
     case 395:
       return THUNDERSTORM;
     default:
