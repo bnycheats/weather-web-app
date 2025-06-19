@@ -5,8 +5,8 @@ import FOG from "../assets/svg/fog.svg";
 import FREEZING_RAIN from "../assets/svg/freezing-rain.svg";
 import HEAVY_RAIN from "../assets/svg/heavy-rain.svg";
 import ICE_PELLETES from "../assets/svg/ice-pellets.svg";
-import MOSTLY_CLOUD from "../assets/svg/mostly-cloud.svg";
-import MOSTLY_CLOUD_NIGHT from "../assets/svg/mostly-cloud-night.svg";
+// import MOSTLY_CLOUD from "../assets/svg/mostly-cloud.svg";
+// import MOSTLY_CLOUD_NIGHT from "../assets/svg/mostly-cloud-night.svg";
 import PARTLY_CLOUD from "../assets/svg/partly-cloud.svg";
 import PARTLY_CLOUD_NIGHT from "../assets/svg/partly-cloud-night.svg";
 import CLOUDY from "../assets/svg/cloudy.svg";
@@ -18,39 +18,57 @@ import { isDaytime } from "./isDaytime";
 
 export default function getWeatherIcon(code: number) {
   switch (code) {
-    case 1000:
-    case 1100:
+    case 113:
       return isDaytime() ? CLEAR : CLEAR_NIGHT;
-    case 1101:
+    case 116:
       return isDaytime() ? PARTLY_CLOUD : PARTLY_CLOUD_NIGHT;
-    case 1102:
-      return isDaytime() ? MOSTLY_CLOUD : MOSTLY_CLOUD_NIGHT;
-    case 1001:
+    case 119:
       return CLOUDY;
-    case 2100:
-    case 2000:
+    case 248:
       return FOG;
-    case 4000:
-      return DRIZZLE;
-    case 4200:
-    case 4001:
+    case 353:
+    case 353:
+    case 296:
+    case 293:
+    case 299:
+    case 302:
+    case 176:
       return RAIN;
-    case 4201:
+    case 263:
+    case 266:
+    case 185:
+    case 281:
+    case 284:
+      return DRIZZLE;
+    case 308:
+    case 305:
+    case 356:
+    case 389:
       return HEAVY_RAIN;
-    case 5001:
-    case 5100:
-    case 5000:
-    case 5101:
+    case 179:
+    case 227:
+    case 323:
+    case 326:
+    case 329:
+    case 332:
+    case 335:
+    case 338:
+    case 368:
+    case 371:
+    case 392:
       return SNOW;
-    case 6000:
-    case 6200:
-    case 6001:
+    case 311:
+    case 314:
       return FREEZING_RAIN;
-    case 7102:
-    case 7000:
-    case 7101:
+    case 350:
+    case 374:
+    case 377:
       return ICE_PELLETES;
-    case 8000:
+    case 200:
+    case 386:
+    case 389:
+    case 392:
+    case 395:
       return THUNDERSTORM;
     default:
       return null;

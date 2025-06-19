@@ -1,4 +1,3 @@
-import type { WeatherForecast } from "@/utils/types";
 import { format } from "date-fns";
 import getWeatherIcon from "@/utils/getWeatherIcon";
 import {
@@ -33,19 +32,17 @@ export default function WeatherCard(props: WeatherCardProps) {
       {first && rest && (
         <WeatherInfoContainer>
           <WeatherInfoLarge
-            startTime={
-              first?.startTime && format(new Date(first.startTime), "iii eo")
-            }
-            temperature={first?.values?.temperature}
-            weatherIcon={getWeatherIcon(first?.values?.weatherCode) ?? ""}
+            startTime={first?.date && format(new Date(first.date), "iii eo")}
+            temperature={first?.tempC}
+            weatherIcon={getWeatherIcon(Number(first?.weatherCode)) ?? ""}
           />
-          <div className="flex-1 z-10 grid grid-cols-2 gap-10 sm:gap-0 sm:grid-cols-4 items-center">
+          <div className="flex-1 z-10 flex overflow-auto gap-12 pl-6 sm:pl-0 sm:justify-center md:gap-0 md:grid md:grid-cols-6 items-center">
             {rest.map((weather, index) => (
               <WeatherInfo
                 key={index}
-                startTime={format(new Date(weather.startTime), "iii")}
-                temperature={weather.values.temperature}
-                weatherIcon={getWeatherIcon(weather?.values?.weatherCode) ?? ""}
+                startTime={format(new Date(weather.date), "iii")}
+                temperature={weather.tempC}
+                weatherIcon={getWeatherIcon(Number(weather?.weatherCode)) ?? ""}
               />
             ))}
           </div>
@@ -56,7 +53,14 @@ export default function WeatherCard(props: WeatherCardProps) {
 }
 
 type WeatherCardProps = {
-  intervals: WeatherForecast[];
+  intervals: Interval[];
   city?: string;
   country?: string;
+};
+
+export type Interval = {
+  date: string;
+  tempC: string;
+  weatherCode: string;
+  chanceofrain: string;
 };

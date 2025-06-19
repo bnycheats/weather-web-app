@@ -21,7 +21,7 @@ export function WeatherInfoLarge(props: WeatherInfoLargeProps) {
         )}
         {startTime && (
           <div className="uppercase text-sm sm:text-md bg-gray-800 px-2 rounded-full">
-            {startTime}
+            Today
           </div>
         )}
       </div>
@@ -58,13 +58,13 @@ export function WeatherInfo(props: WeatherInfoProps) {
 }
 
 type WeatherInfoLargeProps = {
-  temperature?: number;
+  temperature?: string;
   startTime?: string;
   weatherIcon?: string;
 };
 
 type WeatherInfoProps = {
-  temperature?: number;
+  temperature?: string;
   startTime?: string;
   weatherIcon?: string;
 };

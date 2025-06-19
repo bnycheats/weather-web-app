@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import WeatherCard from "./components/WeatherCard";
+import WeatherCard, { type Interval } from "./components/WeatherCard";
 import { useGeolocation } from "./hooks/useGeolocation";
-import { getForecast } from "./utils/tomorrow/queries/timelines";
+import { getForecast } from "./utils/worldweatheronline/queries/timelines";
+import { format } from "date-fns";
 
 function App() {
   const { location, error, ...rest } = useGeolocation();
@@ -13,13 +14,25 @@ function App() {
     enabled: !!(location?.latitude && location?.longitude),
   });
 
+  const todayTime = format(new Date(), "hmm");
+
+  const intervals: Interval[] =
+    data?.data?.weather.map((item) => {
+      const find = item.hourly
+        .reverse()
+        .find((h) => Number(h.time) <= Number(todayTime));
+      return {
+        date: item.date,
+        tempC: find?.tempC ?? "",
+        weatherCode: find?.weatherCode ?? "",
+        chanceofrain: find?.chanceofrain ?? "",
+      };
+    }) ?? [];
+
   return (
     <div className="flex bg-[url('./assets/images/hero-img.jpg')] bg-cover bg-center h-screen items-center justify-center">
       <div className="bg-white/30 absolute backdrop-grayscale-50 h-screen w-screen"></div>
-      <WeatherCard
-        intervals={data?.data?.timelines[0]?.intervals?.slice(1, 6) ?? []}
-        {...rest}
-      />
+      <WeatherCard intervals={intervals} {...rest} />
     </div>
   );
 }
